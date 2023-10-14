@@ -1,0 +1,86 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    background-color: #016A70;
+    color: #FFFFDD;
+    text-align: center;
+    padding: 30px;
+}
+
+nav {
+    background-color: #A2C579;
+    color: #FFFFDD;
+    text-align: center;
+    padding: 10px;
+}
+
+nav a {
+    color: #FFFFDD;
+    text-decoration: none;
+    padding: 0 20px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: #016A70;
+    font-weight: bold;
+}
+
+/* Añade el estilo para el enlace h1 */
+header a {
+    color: #FFFFDD;
+    text-decoration: none;
+}
+
+section {
+    padding: 40px;
+}
+
+footer {
+    background-color: #D2DE32;
+    color: #016A70;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.redes-sociales {
+    display: flex;
+    align-items: center;
+}
+
+.redes-sociales a {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.redes-sociales img {
+    width: 30px;
+    height: 30px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.noticia {
+    border: 1px solid #016A70;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
