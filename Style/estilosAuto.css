@@ -39,6 +39,11 @@ header {
 .animación{
     animation: 3s forwards nombre;
 }
+@keyframes nombre{
+   0%{transform: rotatey(0deg);} 
+   100%{transform: rotatey(360deg);}
+}
+
 
 nav {
     background-color: #A2C579;
