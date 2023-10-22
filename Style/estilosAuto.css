@@ -225,51 +225,7 @@ footer .redes-sociales {
     width: 30px;
     height: 30px;
 }
-/*
-footer {
-    background-color: #00815ca1;
-    color: #016A70; 
-    text-align: center;
-    padding: 10px;
-    padding-top: auto;
-}
-footer .volver-arriba{
-    background-color: #333;
-    color: #fff;
-    border-radius: 10px;
-    padding: 10px 20px;
-    margin-top: 10px;
 
-}
-footer .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-footer .container p {
-    text-align: left;
-    padding-left: 10px;
-    font-weight: bold;
-}
-
-footer .redes-sociales {
-    display: flex;
-    justify-content: flex-end; 
-}
-
-.redes-sociales a {
-    display: inline-block;
-    margin: 0 10px;
-}
-
-.redes-sociales img {
-    width: 30px;
-    height: 30px;
-}
-*/
 footer .integrantes {
     background-color: #016A70;
     color: #FFFFDD;
@@ -294,3 +250,9 @@ footer .integrantes p:hover {
 }
 
 
+.asi{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    grid-area: asi;
+}
