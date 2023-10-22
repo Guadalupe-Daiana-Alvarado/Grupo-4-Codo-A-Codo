@@ -305,3 +305,119 @@ padding-bottom: 10px;
     font-size: 14px; /* Ajustar el tamaño de fuente a tu preferencia */
     color: #016A70; /* Cambiar el color del texto a tu preferencia */
 }
+/*FOOTER*/
+footer {
+    background-color: #00815ca1;
+    color: #016A70; 
+    text-align: center;
+    padding: 10px;
+    padding-top: auto;
+    grid-area: pie-pag;
+}
+footer .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+footer .volver-arriba{
+    background-color: #333;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 10px;
+
+}
+
+
+footer .container p {
+    text-align: left;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+footer .redes-sociales {
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.redes-sociales a {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.redes-sociales img {
+    width: 30px;
+    height: 30px;
+}
+/*
+footer {
+    background-color: #00815ca1;
+    color: #016A70; 
+    text-align: center;
+    padding: 10px;
+    padding-top: auto;
+}
+footer .volver-arriba{
+    background-color: #333;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 10px;
+
+}
+footer .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .container p {
+    text-align: left;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+footer .redes-sociales {
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.redes-sociales a {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.redes-sociales img {
+    width: 30px;
+    height: 30px;
+}
+*/
+footer .integrantes {
+    background-color: #016A70;
+    color: #FFFFDD;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 85%;
+    margin: 10px auto; 
+    text-align: center; 
+    padding: 10px; 
+   
+}
+
+footer .integrantes p {
+    display: inline;
+    padding:10px;
+    transition: all 0.3s ease; 
+}
+
+footer .integrantes p:hover {
+    color: #D2DE32;
+    font-size: 17px;
+}
+
+

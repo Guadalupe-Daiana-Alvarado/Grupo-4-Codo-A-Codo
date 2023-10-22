@@ -8,12 +8,6 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-main{
-    padding: 0px;
-    margin: 0px;
-    display: grid;
-    grid-template-columns: 50% 50%;
-}
 
 header {
     background-color: #016A70;
@@ -64,7 +58,6 @@ nav a:hover {
     color: #016A70;
     font-weight: bold;
 }
-
 header a {
     color: #FFFFDD;
     text-decoration: none;
@@ -73,9 +66,9 @@ header a {
 
 
 .contenedor-bordeado {
-    border: 1px solid #016A70; /* Agregar borde al contenedor */
-    border-radius: 5px; /* Borde redondeado */
-    padding: 10px; /* Añadir espacio interno */
+    border: 1px solid #016A70; 
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .imagen {
@@ -92,11 +85,12 @@ header a {
 
 /* secciones */
 
+
 section {
     padding: 40px;
 }
 
-.grid-container {
+.index .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
@@ -104,9 +98,10 @@ section {
     border: 1px solid #016A70;
     border-radius: 5px;
     padding: 10px;
+
 }
 
-.noticia {
+.index .noticia {
     padding: 20px;
     flex-direction: column;
     justify-content: space-between;
@@ -118,26 +113,67 @@ section {
     align-items: center;
 }
 
-main section:nth-child(2n-1) .media{
+.media iframe {
+    width:100%;
+    height: 315px;
+}
+
+
+#derecha .media{
     grid-row: 1 / 3;
 }
 
-.media iframe{
-    width: 100%;
-    height: 315px;
-}
-
 .media img{
-    width: 100%;
-    height: 315px;
-}
-
-.Automovilismo img{
     object-fit: cover;
     width: 100%;
     height: 100%;
     display: block;
+    box-shadow: 1px 1px 1px black;
 }
+
+
+/*FUTBOL*/
+
+.Futbol .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px;
+    border: 1px solid #016A70;
+    border-radius: 5px;
+    padding: 10px;
+}
+.Futbol #noticiasLinea img{
+    height: 200px;
+}
+.Futbol .noticia {
+    padding: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.Futbol .linea{
+    width: 100%; 
+    height: 1px; 
+    background-color: #666666; 
+    margin: 20px auto; 
+}
+
+
+.Futbol img{
+    margin-left: auto;
+    margin-right: auto;
+    width:100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+
+
+
+/*FOOTER*/
+
 /*FOOTER*/
 footer {
     background-color: #00815ca1;
@@ -253,27 +289,3 @@ footer .integrantes p:hover {
 }
 
 
-
-
-
-@media screen and (min-width: 1250px) {
-    main {
-        grid-template-columns: repeat(3, 33%);
-    }
-}
-
-@media screen and (max-width: 750px) {
-    main {
-        display: flex;
-        flex-direction: column;
-    }
-
-    main section .media{
-        grid-row: 1 / 3;
-    }
-
-    .grid-container{
-        display: flex;
-        flex-direction: column;
-    }
-}
