@@ -22,6 +22,30 @@ header {
     padding: 30px;
 }
 
+.encabezado {
+    display: flex;
+    text-align: center;
+    background-color: #016a70;
+    color: #FFFFDD;
+    justify-content: space-between;
+    grid-area: encabezado;
+
+}
+
+.encabezado img {
+    width: 150px;
+    margin: 0px 5px;
+    justify-content: center;
+}
+
+.encab-medio {
+    margin: 30px;
+    font-size: 18px;
+}
+.animación{
+    animation: 3s forwards nombre;
+}
+
 nav {
     background-color: #A2C579;
     color: #FFFFDD;
