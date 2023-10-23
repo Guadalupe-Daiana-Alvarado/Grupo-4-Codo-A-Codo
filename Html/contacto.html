@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entre Tiempo</title>
-    <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="../Style/estilosAuto.css">
     <link rel="preconnect" href="https://fonts.googleapis.com%22%3E/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link
@@ -37,91 +37,88 @@
         <a href="../Html/register.html">Registrarse</a>
     </nav>
 
-    <section id="conact" class="contact-container">
+    <main class="contacto">
+        <section id="conact" class="contact-container">
        
-    </section>
-
-    <section " class=" conatanos">
-        <h4 style="text-align: center; padding: 10px;">Selecciona tus preferencias</h4>
-        <div class="datos">
-            <form action="submit">
-                <h4>Recibir informacion</h4>
-                <label for="diariamente">
-                    <input type="checkbox" name="diariamente" id="diariamente">Diariamente
-                </label>
-                <label for="semanalmente">
-                    <input type="checkbox" name="semanalmente" id="semanalmente">Semanalmente
-                </label>
-                <label for="mensualmente">
-                    <input type="checkbox" name="mensualmente" id="mensualmente">Mensualmente
-                </label>
-            </form>
-
-            <form action="submit">
-                <h4>Deporte favorito</h4>
-
-                <label for="fotbol">
-                    <input type="checkbox" name="Fotbol" id="fotbol">Fotbol
-                </label>
-                <label for="tenis">
-                    <input type="checkbox" name="tenis" id="tenis">Tenis
-                </label>
-                <label for="motociclismo">
-                    <input type="checkbox" name="motociclismo" id="motociclismo">Motociclismo
-                </label>
-            </form>
-            <form action="submit">
-                <h4>Formar parte del apartado premium</h4>
-                <label for="si">
-                    <input type="checkbox" name="si" id="si">Si
-                </label>
-                <label for="no">
-                    <input type="checkbox" name="no" id="no">No
-                </label>
-                <label for="quizas">
-                    <input type="checkbox" name="quizas" id="quizas">Recibir info para tomar una desicion
-                </label>
-            </form>
-
-            <div>
-                <input style="padding: 6px;" type="email" name="" id="email" placeholder="ejemplo@gmail.com">
-                <button style="padding: 3px; font-size: medium;" type="submit">Enviar</button>
-
+        </section>
+    
+        <section " class=" conatanos">
+            <h4 style="text-align: center; padding: 10px;">Selecciona tus preferencias</h4>
+            <div class="datos">
+                <form action="submit">
+                    <h4>Recibir informacion</h4>
+                    <label for="diariamente">
+                        <input type="radio" name="preferenciaEnvio" id="diariamente">Diariamente
+                    </label>
+                    <label for="semanalmente">
+                        <input type="radio" name="preferenciaEnvio" id="semanalmente">Semanalmente
+                    </label>
+                    <label for="mensualmente">
+                        <input type="radio" name="preferenciaEnvio" id="mensualmente">Mensualmente
+                    </label>
+                </form>
+    
+                <form action="submit">
+                    <h4>Deporte favorito</h4>
+    
+                    <label for="fotbol">
+                        <input type="radio" name="Fotbol" id="fotbol">Fotbol
+                    </label>
+                    <label for="tenis">
+                        <input type="radio" name="tenis" id="tenis">Tenis
+                    </label>
+                    <label for="motociclismo">
+                        <input type="radio" name="motociclismo" id="motociclismo">Motociclismo
+                    </label>
+                </form>
+                <form action="submit">
+                    <h4>Formar parte del apartado premium</h4>
+                    <label for="si">
+                        <input type="radio" name="premium" id="si">Si
+                    </label>
+                    <label for="no">
+                        <input type="radio" name="premium" id="no">No
+                    </label>
+                    <label for="quizas">
+                        <input type="radio" name="premium" id="quizas">Recibir info para tomar una desicion
+                    </label>
+                </form>
+    
             </div>
-
-
-        </div>
-
-    </section>
-
-    <section  class=" conatanos">
-        <h4 style="text-align: center; padding: 10px;">Selecciona tus preferencias</h4>
-        <div class="datos">
-            <form action="submit">
-                <h4>Datos del contacto:</h4>
-
-                <div>
-                    <input style="padding: 6px;" type="nombre" name="" id="nombre" placeholder="Guafalupe">
-                    <input style="padding: 6px;" type="apellido" name="" id="apellido" placeholder="Alvarado">
-                    <input style="padding: 6px;" type="correo" name="" id="correo" placeholder="ejemplo@gmail.com">
-                </div>
-            </form>
-
-            <form action="submit">
-                <label for="coment">
-                    <textarea name="" id="" cols="35" rows="10" placeholder="Comentario:"></textarea>
-                </label>  
-                            
-            </form>
-            
+    
+        </section>
+    
+        <section  class=" conatanos">
+            <h4 style="text-align: center; padding: 10px;">Selecciona tus preferencias</h4>
+            <div class="datos">
+                <form action="submit">
+                    <h4>Datos del contacto:</h4>
+    
+                    <div>
+                        <input style="padding: 6px;" type="nombre" name="" id="nombre" placeholder="Nombre">
+                        <input style="padding: 6px;" type="apellido" name="" id="apellido" placeholder="Apellido">
+                        <input style="padding: 6px;" type="correo" name="" id="correo" placeholder="ejemplo@gmail.com">
+                    </div>
+                </form>
+    
+                <form action="submit">
+                    <label for="coment">
+                        <textarea name="" id="" cols="35" rows="10" placeholder="Comentario:"></textarea>
+                    </label>  
+                                
+                </form>
+                
+            </div>
             <div>
                 <button style="padding: 3px; font-size: medium;" type="submit">Enviar</button>
 
             </div>
 
-        </div>
+        </section>
+    
 
-    </section>
+
+    </main>
 
 
 
