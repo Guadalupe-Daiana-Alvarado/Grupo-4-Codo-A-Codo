@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,7 +15,7 @@
 
 </head>
 
-<body style="background-color: rgba(116, 188, 190, 0.5);">
+<body style="background-color: rgba(116, 188, 190, 0.5);" id="app">
 
     <header class="encabezado">
         <div class="encab-izq">
@@ -40,22 +40,19 @@
         <a href="../Html/register.html">Registrarse</a>
     </nav>
 
-    <main class="contacto">
-        <section id="conact" class="contact-container">
-       
-        </section>
-    
-        <section " class=" conatanos">
-            <h1 style="text-align: center; padding: 10px;">Personajes del deporte</h1>
-            <div class="datos">
-                <h4>Creamos esta sección para que entre todos armemos la mejor base de datos con nuestros deportistas favoritos.</h4>
-                <p>Vas a poder sumar información, editar si ves algún dato incorrecto y hasta borrarlo si no es un deportista.</p>
-                <p>Te pedimos por favor que no borres los deportistas que no sean de tu agrado. Respetemos las opiniones del resto.</p>
-                
-                <button  id="redireccionarBtn" style="padding: 3px; font-size: medium;" type="submit" >Ingresar</button>
-            </div>
-    
-        </section>
+    <main class="tablaDeportistas" id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Nacionalidad</th>  
+                    <th>Descripcion</th> 
+                    <th>Deporte</th>             
+                </tr>
+            </thead>
+            <tbody id="tablaProductos"> </tbody>
+        </table>
 
     </main>
 
@@ -78,9 +75,7 @@
            
             <p> Guadalupe Alvarado </p>
             <p>•</p>
-               
-            <p> Máximo Bertolín</p>  
-            <p>•</p>      
+ 
             <p> Erica Clatt</p>  
             <p>•</p>  
             <p> Delfina Piendibene</p>  
@@ -91,12 +86,28 @@
     </footer>
 
     <script>
-        document.getElementById('redireccionarBtn').addEventListener('click', function() {
-            // Redirige a otraPagina.html
-            window.location.href = 'listado.html';
-        });
-    </script>
+        const URL = "http://127.0.0.1:5500/"
+        fetch("http://127.0.0.1:5000/deportistas")
+            .then(function (response) {
+                if (response.ok) { return response.json(); }
+            })
+            .then(function (data) {
+                let tablaProductos = document.getElementById('tablaProductos');
 
+                for (let deportista of data) {
+                    var fila = document.createElement('tr');
+                    fila.innerHTML = '<td>' + deportista.Nombre + '</td>' +
+                        '<td>' + deportista.Apellido + '</td>' +
+                        '<td align="right">' + deportista.Nacionalidad + '</td>' +
+                        '<td align="right">' + deportista.Comentarios + '</td>' +
+                        '<td align="right">' + deportista.Deporte + '</td>';
+                    tablaProductos.appendChild(fila);
+                }
+            })
+            .catch(function (error) {
+                alert('Error al obtener los productos.');
+            });
+    </script>
 </body>
 
 </html>

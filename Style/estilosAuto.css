@@ -311,6 +311,40 @@ section {
     background-color: #014C4F;
 }
 
+/* DEPORTISTAS */
+.tablaDeportistas table{
+    width: 80%;
+    margin:auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.tablaDeportistas th, td {
+    border: 1px solid #016A70;
+    padding: 8px;
+    text-align: left;
+}
+
+.tablaDeportistas thead {
+    background-color: #016A70;
+    color: #FFFFDD;
+}
+
+.tablaDeportistas #tablaProductos {
+    margin-top: 20px;
+}
+
+.tablaDeportistas #tablaProductos th, #tablaProductos td {
+    border: 1px solid #016A70;
+    padding: 10px;
+    text-align: left;
+}
+
+.tablaDeportistas #tablaProductos thead {
+    background-color: #016A70;
+    color: #FFFFDD;
+}
+
 /* CONTATCO*/
 
 .contacto section.conatanos {
@@ -404,7 +438,37 @@ section {
 .contacto .conatanos input{
     margin-bottom: 10px;
 }
+#formularioAgregar {
+    margin-top: 20px;
+}
 
+#formularioAgregar label {
+    display: block;
+    margin: 10px 0;
+    text-align: left;
+}
+
+#formularioAgregar input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#formularioAgregar button {
+    background-color: #016A70;
+    color: #FFFFDD;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#formularioAgregar button:hover {
+    background-color: #014C4F;
+}
 
 /*FOOTER*/
 
@@ -415,6 +479,8 @@ footer {
     text-align: center;
     padding: 10px;
     padding-top: auto;
+    width: 100%;
+    bottom: 0px
 }
 footer .container {
     display: flex;
