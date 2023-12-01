@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entre Tiempo</title>
+    <link rel="stylesheet" href="../Style/estilosAuto.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com%22%3E/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+</head>
+
+<body style="background-color: rgba(116, 188, 190, 0.5);" id="app">
+
+    <header class="encabezado">
+        <div class="encab-izq">
+            <img src="../img-tenis/Logo-Deportivo-tenis.png" alt="Logo del Sitio web">
+        </div>
+        <div class="encab-medio">
+            <a style="text-decoration: none; color: antiquewhite;" href="main.html">
+                <h1 class="animación">Entre Tiempo</h1>
+            </a>
+        </div>
+        <div class="encab-der">
+            <img src="../img-tenis/Logo-Deportivo-tenis.png" alt="Logo del Sitio web">
+        </div>
+    </header>
+    <nav id="arriba">
+        <a href="../Html/main.html">Inicio</a>
+        <a href="../Html/fotbol.html">Fútbol</a>
+        <a href="../Html/tenis.html">Tenis</a>
+        <a href="../Html/motociclismo.html">Motociclismo</a>
+        <a href="../Html/CRUD.html">Personajes</a>
+        <a href="../Html/contacto.html">Contacto</a>
+        <a href="../Html/register.html">Registrarse</a>
+    </nav>
+    <main>
+        <div id="app" class="modificarDeportista" >
+            <form @submit.prevent="obtenerDeportista" id="cargarID">
+                <label for="id">ID del Deportista: </label>
+                <input type="text" v-model="id" required><br>
+                <button type="submit" class="botonModif">Modificar Deportista</button> 
+            </form>
+    
+            <div v-if="mostrarDatosDeportista" class="registro">
+                <h2>Datos del Deportista</h2>
+                <form @submit.prevent="guardarCambios">
+                    <label for="nombreModificar">Nombre:</label>
+                    <input type="text" id="nombreModificar" v-model="nombre" required><br>
+    
+                    <label for="apellidoModificar">Apellido:</label>
+                    <input type="text" id="apellidoModificar" v-model="apellido" required><br>
+    
+                    <label for="nacionalidadModificar">Nacionalidad:</label>
+                    <input type="text" id="nacionalidadModificar" v-model="nacionalidad" required><br>
+    
+                    <label for="ComentariosModificar">Descripción:</label>
+                    <input type="text" id="ComentariosModificar" v-model="Comentarios" required><br>
+    
+                    <label for="CantidadTitulosModificar">Cantidad de Títulos:</label>
+                    <input type="text" id="CantidadTitulosModificar" v-model="Cantidad_titulos" required><br>
+    
+                    <label for="deporteModificar">Deporte:</label>
+                    <input type="text" id="deporteModificar" v-model="deporte" required><br>
+    
+                    <button type="submit">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+      
+    
+    </main>
+        
+
+    <footer>
+        
+        <div class="container">
+            <p>&copy; 2023 Entre Tiempo</p>
+            <a class="volver-arriba" href="#arriba">Volver arriba</a>
+            <div class="redes-sociales">
+
+                <a target="_blank" href="https://www.instagram.com"><img src="../Image/instagram.svg" alt="Instagram"></a>
+                <a target="_blank" href="https://www.twitter.com"><img src="../Image/twitter-x.svg" alt="Twitter"></a>
+
+            </div>
+        </div>
+        <div class="integrantes">
+
+         
+            <p> Guadalupe Alvarado </p>
+            <p>•</p>     
+            <p> Erica Clatt</p>  
+            <p>•</p>  
+            <p> Delfina Piendibene</p>  
+            <p>•</p>
+            <p> Tomas Spirito </p>     
+        </div>
+
+    </footer>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const URL = "http://127.0.0.1:5000/";
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    id: '',
+                    nombre: '',
+                    apellido: '',
+                    nacionalidad: '',
+                    Comentarios: '',
+                    cantidad_titulos: '',
+                    deporte: '',
+                    mostrarDatosDeportista: false,
+                };
+            },
+            methods: {
+                obtenerDeportista() {
+                    console.log('http://127.0.0.1:5000/deportistas/' + this.id)
+                    fetch(URL + 'deportistas/' + this.id)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.nombre = data.nombre;
+                            this.apellido = data.apellido;
+                            this.nacionalidad = data.nacionalidad;
+                            this.descripcion = data.descripcion;
+                            this.cantidad_titulos = data.cantidad_titulos;
+                            this.deporte = data.deporte;
+                            this.mostrarDatosDeportista = true;
+                        })
+                        .catch(error => console.error('Error:', error));
+                },
+                guardarCambios() {
+                    const formData = new FormData();
+                    formData.append('nombre', this.nombre);
+                    formData.append('apellido', this.apellido);
+                    formData.append('nacionalidad', this.nacionalidad);
+                    formData.append('Comentarios', this.Comentarios);
+                    formData.append('Cantidad_titulos', this.Cantidad_titulos);
+                    formData.append('deporte', this.deporte);
+
+                    fetch(URL + 'deportistas/' + this.id, {
+                        method: 'PUT',
+                        body: formData,
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            alert('Deportista actualizado correctamente');
+                            this.limpiarFormulario();
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error al actualizar el deportista');
+                        });
+                },
+                limpiarFormulario() {
+                    this.id = '';
+                    this.nombre = '';
+                    this.apellido = '';
+                    this.nacionalidad = '';
+                    this.Comentarios = '';
+                    this.cantidad_titulos = '';
+                    this.deporte = '';
+                    this.mostrarDatosDeportista = false;
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+
+</html>

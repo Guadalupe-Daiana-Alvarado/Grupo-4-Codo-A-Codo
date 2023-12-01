@@ -9,6 +9,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 CORS(app)  # Esto habilitará CORS para todas las rutas
+CORS(app, resources={r"/deportistas": {"origins": "*"}})
 
 #--------------------------------------------------------------------
 print ("\033[(H\033[J")
@@ -36,7 +37,7 @@ class Listado:
 
         # Una vez que la base de datos está establecida, creamos la tabla si no existe
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS deportistas (
-            id INT,
+            id INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
             Nombre VARCHAR(100) NOT NULL,
             Apellido VARCHAR(100) NOT NULL,
             Nacionalidad VARCHAR(100) NOT NULL,
@@ -51,20 +52,14 @@ class Listado:
 
     #Agregar deportista
 
-    def agregar_deportista(self, cod, nom, ape, nac, dep, cant, cmt):
-            self.cursor.execute(f"SELECT * FROM deportistas WHERE id = {cod}")
-            deportista_exist = self.cursor.fetchone()
-            if deportista_exist:
-                return False
-
-            sql = f"INSERT INTO deportistas \
-                (id, Nombre, Apellido, Nacionalidad, Deporte, Cantidad_titulos, Comentarios) \
-                VALUES \
-                ({cod}, '{nom}', '{ape}', '{nac}', '{dep}', {cant}, '{cmt}')"
-            self.cursor.execute(sql)
-            self.conn.commit()
-            return True
-
+    def agregar_deportista(self, nom, ape, nac, dep, cant, cmt):
+        sql = f"INSERT INTO deportistas \
+            (Nombre, Apellido, Nacionalidad, Deporte, Cantidad_titulos, Comentarios) \
+            VALUES \
+            ('{nom}', '{ape}', '{nac}', '{dep}', {cant}, '{cmt}')"
+        self.cursor.execute(sql)
+        self.conn.commit()
+        return True    
     #Listar deportista
 
     def listar_productos(self):
@@ -107,7 +102,7 @@ class Listado:
             self.cursor.execute(sql)
             self.conn.commit()
             return True
-    
+            
     def listar_deportistas(self):
         self.cursor.execute("SELECT * FROM deportistas")
         lista_deportistas = self.cursor.fetchall()
@@ -116,12 +111,12 @@ class Listado:
  # -------------------------------------------------------------------
 lista_deportistas = Listado(host='localhost', user='root', password='', database='miapp')
 """
-lista_deportistas.agregar_deportista (1, 'Valentino', 'Rossi', 'Italiano', 'Motociclismo', 9, 'De los 9 títulos, 7 fueron en la máxima categoría')
-lista_deportistas.agregar_deportista (2, 'Lionel', 'Messi', 'Argentino', 'Futbol', 43, 'Jugó más de 20 años en el Barcelona siempre con el número 10')
-lista_deportistas.agregar_deportista (3, 'Serena', 'Williams', 'Estadounidense', 'Tenis', 73, 'Es la única tenista en haber completado el Golden Slam de carrera en las dos modalidades, individuales y dobles')
-
-lista_deportistas.consultar_producto(1)
+lista_deportistas.agregar_deportista ('Valentino', 'Rossi', 'Italiano', 'Motociclismo', 9, 'De los 9 títulos, 7 fueron en la máxima categoría')
+lista_deportistas.agregar_deportista ('Lionel', 'Messi', 'Argentino', 'Futbol', 43, 'Jugó más de 20 años en el Barcelona siempre con el número 10')
+lista_deportistas.agregar_deportista ( 'Serena', 'Williams', 'Estadounidense', 'Tenis', 73, 'Es la única tenista en haber completado el Golden Slam de carrera en las dos modalidades, individuales y dobles')
 """
+lista_deportistas.consultar_producto(1)
+
 
 
 
@@ -134,16 +129,15 @@ def obtener_deportistas():
 # Ruta para agregar un deportista
 @app.route('/deportistas', methods=['POST'])
 def agregar_deportista():
-    id = request.form['id']
-    nombre = request.form['nombre']
-    apellido = request.form['apellido']
-    nacionalidad = request.form['nacionalidad']
-    deporte = request.form['deporte']  
-    titulos = request.form['titulos']
-    descripcion = request.form['descripcion']
+    Nombre = request.form['Nombre']
+    Apellido = request.form['Apellido']
+    Nacionalidad = request.form['Nacionalidad']
+    Deporte = request.form['Deporte']  
+    Cantidad_titulos = request.form['Cantidad_titulos']
+    Comentarios = request.form['Comentarios']
     print("*"*20)
 
-    if lista_deportistas.agregar_deportista(id, nombre, apellido, nacionalidad, deporte, titulos,descripcion):
+    if lista_deportistas.agregar_deportista( Nombre, Apellido, Nacionalidad, Deporte, Cantidad_titulos,Comentarios):
         return jsonify({"mensaje": "Producto agregado"}), 201
     else:
         return jsonify({"mensaje": "Producto ya existe"}), 400
@@ -163,9 +157,9 @@ def eliminar_deportista(id):
 # Ruta para modificar un deportista por ID
 @app.route('/deportistas/<int:id>', methods=['PUT'])
 def modificar_deportista(id):
-    data = request.form()
-    new_titulos = request.form['titulos']
-    new_descripcion = request.form['descripcion']
+    data = request.form
+    new_titulos = request.form['Cantidad_titulos']
+    new_descripcion = request.form['Comentarios']
     if lista_deportistas.modificar_producto(id,new_titulos,new_descripcion):
         return jsonify({"mensaje": "deportista modificado"}), 200
     else:

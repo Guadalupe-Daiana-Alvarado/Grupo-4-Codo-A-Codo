@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta v-model="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entre Tiempo</title>
     <link rel="stylesheet" href="../Style/estilosAuto.css">
     <link rel="preconnect" href="https://fonts.googleapis.com%22%3E/">
@@ -36,7 +36,7 @@
         <a href="../Html/tenis.html">Tenis</a>
         <a href="../Html/motociclismo.html">Motociclismo</a>
         <a href="../Html/CRUD.html">Personajes</a>
-        <a href="#">Contacto</a>
+        <a href="../Html/contacto.html">Contacto</a>
         <a href="../Html/register.html">Registrarse</a>
     </nav>
 
@@ -44,6 +44,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>id</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Nacionalidad</th>  
@@ -54,6 +55,36 @@
             <tbody id="tablaProductos"> </tbody>
         </table>
 
+        <button id="mostrarFormulario">Agregar Deportista</button>
+        <button id="botonRedireccion">Modificar Deportista</button>
+
+        <div id="formularioContainer" style="display: none;" class="registro">
+            <h2>Agregar Deportista</h2>
+            <form id="miFormulario"enctype="multipart/form-data">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="Nombre" v-model="Nombre" required>
+                <br>
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="Apellido" v-model="Apellido"  required>
+                <br>
+                <label for="nacionalidad">Nacionalidad:</label>
+                <input type="text" id="Nacionalidad" v-model="Nacionalidad" required>
+                <br>
+                <label for="descripcion" >Descripcion:</label>
+                <textarea id="Comentarios" style="width: 100%;" v-model="Comentarios"></textarea>
+                <br>
+                <label for="deporte">Titulos:</label>
+                <input type="text" id="Cantidad_titulos" v-model="Cantidad_titulos" required>
+                <BR></BR>
+                <label for="deporte">Deporte:</label>
+                <input type="text" id="Deporte" v-model="Deporte" required>
+                <button type="submit">Guardar</button>
+            </form>
+
+            
+        </div>
+
+        
     </main>
 
 
@@ -84,29 +115,92 @@
         </div>
 
     </footer>
-
     <script>
-        const URL = "http://127.0.0.1:5500/"
-        fetch("http://127.0.0.1:5000/deportistas")
+        const URL = "http://127.0.0.1:5500/";
+    
+        function cargarDeportistas() {
+            fetch("http://127.0.0.1:5000/deportistas")
+                .then(function (response) {
+                    if (response.ok) { return response.json(); }
+                })
+                .then(function (data) {
+                    let tablaProductos = document.getElementById('tablaProductos');
+                    tablaProductos.innerHTML = ""; // Limpiar la tabla antes de agregar nuevos elementos
+    
+                    for (let deportista of data) {
+                        var fila = document.createElement('tr');
+
+                        fila.innerHTML = '<td>' + deportista.id + '</td>' + '<td>' + deportista.Nombre + '</td>' +
+                            '<td>' + deportista.Apellido + '</td>' +
+                            '<td align="right">' + deportista.Nacionalidad + '</td>' +
+                            '<td align="right">' + deportista.Comentarios + '</td>' +
+                            '<td align="right">' + deportista.Deporte + '</td>';
+                        tablaProductos.appendChild(fila);
+                    }
+                })
+                .catch(function (error) {
+                    alert('Error al obtener los deportistas.');
+                });
+        }
+    
+        document.getElementById('mostrarFormulario').addEventListener('click', function () {
+            var formularioContainer = document.getElementById('formularioContainer');
+            formularioContainer.style.display = 'block';
+        });
+
+        document.getElementById('botonRedireccion').addEventListener('click', function () {
+        window.location.href = 'agregar.html';
+    });
+
+        document.getElementById('miFormulario').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar que el formulario se envíe por defecto
+            guardarDeportista();
+        });
+    
+        function guardarDeportista() {
+            var formData = new FormData();
+            formData.append('Nombre', document.getElementById('Nombre').value);
+            formData.append('Apellido', document.getElementById('Apellido').value);
+            formData.append('Nacionalidad', document.getElementById('Nacionalidad').value);
+            formData.append('Comentarios', document.getElementById('Comentarios').value);
+            formData.append('Cantidad_titulos', document.getElementById('Cantidad_titulos').value);
+            formData.append('Deporte', document.getElementById('Deporte').value);
+    
+            fetch('http://127.0.0.1:5000/deportistas', {
+                method: 'POST',
+                body: formData // Aquí enviamos formData en lugar de JSON
+            })
             .then(function (response) {
                 if (response.ok) { return response.json(); }
             })
             .then(function (data) {
-                let tablaProductos = document.getElementById('tablaProductos');
-
-                for (let deportista of data) {
-                    var fila = document.createElement('tr');
-                    fila.innerHTML = '<td>' + deportista.Nombre + '</td>' +
-                        '<td>' + deportista.Apellido + '</td>' +
-                        '<td align="right">' + deportista.Nacionalidad + '</td>' +
-                        '<td align="right">' + deportista.Comentarios + '</td>' +
-                        '<td align="right">' + deportista.Deporte + '</td>';
-                    tablaProductos.appendChild(fila);
-                }
+                alert('Producto agregado correctamente.');
+                // Limpiar el formulario para el proximo producto
+                document.getElementById('Nombre').value = "";
+                document.getElementById('Apellido').value = "";
+                document.getElementById('Nacionalidad').value = "";
+                document.getElementById('Comentarios').value = "";
+                document.getElementById('Deporte').value = "";
+                document.getElementById('Cantidad_titulos').value = "";
             })
-            .catch(function (error) {
-                alert('Error al obtener los productos.');
-            });
+                .then(data => {
+                    if (data.mensaje === "Producto agregado") {
+                        alert('Deportista guardado exitosamente.');
+                        // Limpiar el formulario después de guardar
+                        document.getElementById('miFormulario').reset();
+                        // Ocultar el formulario
+                        document.getElementById('formularioContainer').style.display = 'none';
+                        // Cargar nuevamente la lista de deportistas
+                        agregar_deportista();
+                    } else {
+                        alert('Error al guardar el deportista.');
+                    }
+                })
+                
+        }
+    
+        // Cargar los deportistas al cargar la página
+        cargarDeportistas();
     </script>
 </body>
 
