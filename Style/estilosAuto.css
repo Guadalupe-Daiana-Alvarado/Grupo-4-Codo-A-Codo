@@ -254,13 +254,13 @@ section {
 
 
 /*REGISTrO*/
-.registro #registro {
+.registro  {
     background-color: #F4F4F4;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
     width: 70%;
-    margin: 0 auto;
+    margin: 20px auto;
     margin-bottom: 20px;
     
 }
@@ -293,7 +293,7 @@ section {
     font-size: 16px;
 }
 
-.registro button[type="submit"], .botonModif {
+.registro button[type="submit"], #botonEliminar {
     background-color: #016A70;
     color: #FFFFDD;
     border: none;
@@ -305,20 +305,42 @@ section {
     padding: 10px;
     width: 100px;
     height: 50px;
+    text-align: center;
+}
+#botonEliminar{
+    margin-left:5px;
+    background-color: rgb(227, 109, 109);
 }
 
 .registro button[type="submit"]:hover {
     background-color: #014C4F;
 }
+.contacto .conatanos input{
+    margin-bottom: 10px;
+}
 
-.modificarDeportista {
-    background-color: #F4F4F4;
+.contanos input[type="nombre"],
+.contanos input[type="apellido"] {
+    width: 48%;
+    margin-right: 2%;
+}
+
+.conatanos input[type="correo"] {
+    width: 100%;
+}
+
+.conatanos .datos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.conatanos textarea {
+    width: 100%;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 20px;
-    width: 70%;
-    margin: 20px auto;
-    text-align: center;
+    font-size: 16px;
 }
 
 
@@ -370,100 +392,6 @@ section {
     background-color: #014C4F;
 }
 
-
-/* CONTATCO*/
-
-.contacto section.conatanos {
-    background-color: #F4F4F4;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    width: 70%;
-    margin: 20px auto;
-    text-align: center;
-}
-
-.contacto section.conatanos h4 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    padding: 10px;
-}
-
-.contacto section.conatanos .datos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.contacto section.conatanos form {
-    flex: 1;
-    margin: 10px;
-    padding: 10px;
-}
-
-.contacto section.conatanos h4 {
-    font-size: 20px;
-    margin: 0 0 10px;
-}
-
-.contacto section.conatanos label {
-    display: block;
-    margin: 10px 0;
-    text-align: center;
-}
-
-.contacto section.conatanos input[type="text"],
-.contacto section.conatanos input[type="password"],
-.contacto section.conatanos input[type="email"] {
-    width: 100%;
-    padding: 7px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.contacto button[type="submit"] {
-    background-color: #016A70;
-    color: #FFFFDD;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 5px;
-    height: 50px;
-}
-
-.contacto section.conatanos button[type="submit"]:hover {
-    background-color: #014C4F;
-}
-
-.contacto section.conatanos textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.contacto section.conatanos input[type="nombre"],
-.contacto section.conatanos input[type="apellido"] {
-    width: 48%;
-    margin-right: 2%;
-}
-
-.contacto section.conatanos input[type="correo"] {
-    width: 100%;
-}
-
-.contacto section.conatanos button[type="submit"] {
-    width: 10%;
-    margin: 10px 0;
-}
-.contacto .conatanos input{
-    margin-bottom: 10px;
-}
 #formularioAgregar {
     margin-top: 20px;
 }
@@ -496,35 +424,47 @@ section {
     background-color: #014C4F;
 }
 
+@media screen and (max-width: 768px) {
+    .tablaDeportistas {
+        overflow-x: auto;
+    }
+
+    .tablaDeportistas th, .tablaDeportistas td {
+        white-space: nowrap;
+    }
+
+    .tablaDeportistas tbody td {
+        text-align: left;
+    }
+ 
+    
+}
+
 /*FOOTER*/
 
 /*FOOTER*/
 footer {
     background-color: #00815ca1;
-    color: #016A70; 
+    color: #016A70;
     text-align: center;
-    padding: 10px;
-    padding-top: auto;
     width: 100%;
-    bottom: 0px
+    bottom: 0;
 }
+
 footer .container {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 }
 
-footer .volver-arriba{
+footer .volver-arriba {
     background-color: #333;
     color: #fff;
     border-radius: 10px;
     padding: 10px 20px;
     margin-top: 10px;
-
 }
-
 
 footer .container p {
     text-align: left;
@@ -534,7 +474,7 @@ footer .container p {
 
 footer .redes-sociales {
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-end;
 }
 
 .redes-sociales a {
@@ -553,16 +493,13 @@ footer .integrantes {
     font-weight: bold;
     border-radius: 15px;
     width: 85%;
-    margin: 10px auto; 
-    text-align: center; 
-    padding: 10px; 
-   
+    margin: 10px auto;
+    text-align: center;
 }
 
 footer .integrantes p {
     display: inline;
-    padding:10px;
-    transition: all 0.3s ease; 
+    transition: color 0.3s ease, font-size 0.3s ease;
 }
 
 footer .integrantes p:hover {
@@ -570,10 +507,9 @@ footer .integrantes p:hover {
     font-size: 17px;
 }
 
-
 .asi{
     display: flex;
     text-align: center;
     justify-content: space-between;
     grid-area: asi;
-}
+} 

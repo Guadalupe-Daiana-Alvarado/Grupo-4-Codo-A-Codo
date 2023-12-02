@@ -12,10 +12,11 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 </head>
 
-<body style="background-color: rgba(116, 188, 190, 0.5);" id="app">
+<body  id="app">
 
     <header class="encabezado">
         <div class="encab-izq">
@@ -39,15 +40,43 @@
         <a href="../Html/contacto.html">Contacto</a>
         <a href="../Html/register.html">Registrarse</a>
     </nav>
-    <main>
-        <div id="app" class="modificarDeportista" >
-            <form @submit.prevent="obtenerDeportista" id="cargarID">
+    <main class="registro">
+        <div class="modificarDeportista">
+            <form @submit.prevent="obtenerDeportista">
                 <label for="id">ID del Deportista: </label>
                 <input type="text" v-model="id" required><br>
-                <button type="submit" class="botonModif">Modificar Deportista</button> 
+                <button type="submit" class="boton">Modificar Deportista</button>
+                <button @click.prevent="eliminarDeportista" class="boton" id="botonEliminar">
+                    Eliminar Deportista  </button>
             </form>
-    
+
             <div v-if="mostrarDatosDeportista" class="registro">
+                <h2>Datos del Deportista</h2>
+                <table class="tablaDeportistas">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Nacionalidad</th>
+                            <th>Descripción</th>
+                            <th>Deporte</th>
+                            <th>Titulos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaProductos">
+                        <tr>
+                            <td>{{ id }}</td>
+                            <td>{{ nombre }}</td>
+                            <td>{{ apellido }}</td>
+                            <td>{{ nacionalidad }}</td>
+                            <td>{{ Comentarios }}</td>
+                            <td>{{ Deporte }}</td>
+                            <td>{{ Cantidad_titulos }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <h2>Datos del Deportista</h2>
                 <form @submit.prevent="guardarCambios">
                     <label for="nombreModificar">Nombre:</label>
@@ -63,18 +92,19 @@
                     <input type="text" id="ComentariosModificar" v-model="Comentarios" required><br>
     
                     <label for="CantidadTitulosModificar">Cantidad de Títulos:</label>
-                    <input type="text" id="CantidadTitulosModificar" v-model="Cantidad_titulos" required><br>
+                    <input type="text" class="descripciones" id="CantidadTitulosModificar" v-model="Cantidad_titulos" required><br>
     
                     <label for="deporteModificar">Deporte:</label>
                     <input type="text" id="deporteModificar" v-model="deporte" required><br>
     
-                    <button type="submit">Guardar Cambios</button>
+                    <button type="submit" class="botones">Guardar Cambios</button>
+
                 </form>
             </div>
         </div>
+    </main>
       
     
-    </main>
         
 
     <footer>
@@ -106,7 +136,7 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         const URL = "http://127.0.0.1:5000/";
-
+    
         const app = Vue.createApp({
             data() {
                 return {
@@ -115,49 +145,69 @@
                     apellido: '',
                     nacionalidad: '',
                     Comentarios: '',
-                    cantidad_titulos: '',
-                    deporte: '',
+                    Cantidad_titulos: '',
+                    Deporte: '',
                     mostrarDatosDeportista: false,
                 };
             },
             methods: {
+
                 obtenerDeportista() {
-                    console.log('http://127.0.0.1:5000/deportistas/' + this.id)
                     fetch(URL + 'deportistas/' + this.id)
                         .then(response => response.json())
                         .then(data => {
-                            this.nombre = data.nombre;
-                            this.apellido = data.apellido;
-                            this.nacionalidad = data.nacionalidad;
-                            this.descripcion = data.descripcion;
-                            this.cantidad_titulos = data.cantidad_titulos;
-                            this.deporte = data.deporte;
+                            this.nombre = data.Nombre;
+                            this.apellido = data.Apellido;
+                            this.nacionalidad = data.Nacionalidad;
+                            this.Comentarios = data.Comentarios;
+                            this.Cantidad_titulos = data.Cantidad_titulos;
+                            this.Deporte = data.Deporte;
                             this.mostrarDatosDeportista = true;
                         })
                         .catch(error => console.error('Error:', error));
                 },
                 guardarCambios() {
                     const formData = new FormData();
-                    formData.append('nombre', this.nombre);
-                    formData.append('apellido', this.apellido);
-                    formData.append('nacionalidad', this.nacionalidad);
+                    formData.append('Nombre', this.nombre);
+                    formData.append('Apellido', this.apellido);
+                    formData.append('Nacionalidad', this.nacionalidad);
                     formData.append('Comentarios', this.Comentarios);
                     formData.append('Cantidad_titulos', this.Cantidad_titulos);
-                    formData.append('deporte', this.deporte);
+                    formData.append('Deporte', this.Deporte);
 
                     fetch(URL + 'deportistas/' + this.id, {
                         method: 'PUT',
                         body: formData,
                     })
-                        .then(response => response.json())
-                        .then(data => {
-                            alert('Deportista actualizado correctamente');
-                            this.limpiarFormulario();
+                    .then(response => response.json())
+                    .then(data => {
+                        alert('Deportista actualizado correctamente');
+                        this.limpiarFormulario();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al actualizar el deportista');
+                    });
+                },
+                eliminarDeportista() {
+                    if (confirm('¿Estás seguro de que quieres eliminar este deportista?')) {
+                        fetch(URL + 'deportistas/' + this.id, {
+                            method: 'DELETE',
                         })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Error al actualizar el deportista');
-                        });
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    alert('Deportista eliminado correctamente');
+                                    this.limpiarFormulario();
+                                } else {
+                                    alert('No se pudo eliminar el deportista. Asegúrate de que el ID sea correcto.');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                alert('Error al eliminar el deportista');
+                            });
+                    }
                 },
                 limpiarFormulario() {
                     this.id = '';
@@ -171,10 +221,10 @@
                 }
             }
         });
-
+    
         app.mount('#app');
     </script>
-</body>
+    </body>
 
 
 </html>

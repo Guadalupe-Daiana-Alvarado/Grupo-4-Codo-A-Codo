@@ -12,7 +12,7 @@ CORS(app)  # Esto habilitará CORS para todas las rutas
 CORS(app, resources={r"/deportistas": {"origins": "*"}})
 
 #--------------------------------------------------------------------
-print ("\033[(H\033[J")
+print ("\033[(H\033[J") 
 
 class Listado:
     deportistas = [] 
@@ -94,14 +94,13 @@ class Listado:
 
     # Editar deportista
 
-    def modificar_producto(self, id, cant, cmt):
-            sql = f"UPDATE deportistas SET \
-                    Cantidad_titulos = {cant},\
-                    Comentarios = '{cmt}'\
-                    WHERE Id = {id}"
-            self.cursor.execute(sql)
-            self.conn.commit()
-            return True
+    def modificar_deportista(self, id, nuevo_nombre, nuevo_apellido, nuevo_deporte, nueva_nacionalidad, nuevos_titulos, nueva_descripcion):
+
+        sql = "UPDATE deportistas SET Nombre = %s, Apellido = %s, Deporte = %s, Nacionalidad = %s, Cantidad_titulos = %s, Comentarios = %s WHERE id = %s"
+        valores = (nuevo_nombre, nuevo_apellido, nuevo_deporte, nueva_nacionalidad, nuevos_titulos, nueva_descripcion, id)
+        self.cursor.execute(sql, valores)
+        self.conn.commit()
+        return self.cursor.rowcount > 0
             
     def listar_deportistas(self):
         self.cursor.execute("SELECT * FROM deportistas")
@@ -157,10 +156,14 @@ def eliminar_deportista(id):
 # Ruta para modificar un deportista por ID
 @app.route('/deportistas/<int:id>', methods=['PUT'])
 def modificar_deportista(id):
-    data = request.form
+    new_nombre = request.form['Nombre']
+    new_apellido = request.form['Apellido']
+    new_deporte = request.form['Deporte']
+    new_nacionalidad = request.form['Nacionalidad']
     new_titulos = request.form['Cantidad_titulos']
     new_descripcion = request.form['Comentarios']
-    if lista_deportistas.modificar_producto(id,new_titulos,new_descripcion):
+
+    if lista_deportistas.modificar_deportista(id,new_nombre, new_apellido,new_deporte, new_nacionalidad, new_titulos, new_descripcion):
         return jsonify({"mensaje": "deportista modificado"}), 200
     else:
         return jsonify({"mensaje": "deportista no encontrado"}), 404

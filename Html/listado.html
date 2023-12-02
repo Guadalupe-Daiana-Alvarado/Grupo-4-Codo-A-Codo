@@ -11,7 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    
 
 </head>
 
@@ -175,7 +175,6 @@
             })
             .then(function (data) {
                 alert('Producto agregado correctamente.');
-                // Limpiar el formulario para el proximo producto
                 document.getElementById('Nombre').value = "";
                 document.getElementById('Apellido').value = "";
                 document.getElementById('Nacionalidad').value = "";
@@ -199,7 +198,6 @@
                 
         }
     
-        // Cargar los deportistas al cargar la página
         cargarDeportistas();
     </script>
 </body>
